@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "997694752339",
+    "project_id": "carnivorousplants-3913d",
+    "storage_bucket": "carnivorousplants-3913d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997694752339:android:d3dd5d14fc9d5e9c5b68a6",
+        "android_client_info": {
+          "package_name": "space.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997694752339-3mkktsptsd6r7j0l9ar4oskb5tg1lthh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "space.example.myapplication",
+            "certificate_hash": "51982f72945dee3f935bee7a75821fdc411bd549"
+          }
+        },
+        {
+          "client_id": "997694752339-dhkt1053qoh1ttj2qj7t9h9jnnoqtfco.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCK7PxbGJON58xkhKRMobHmTkYep1ZWW_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997694752339-dhkt1053qoh1ttj2qj7t9h9jnnoqtfco.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

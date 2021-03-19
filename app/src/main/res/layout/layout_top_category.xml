@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- top toolbar -->
+    <com.darwindeveloper.horizontalscrollmenulibrary.custom_views.HorizontalScrollMenuView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/menu"
+        app:backgroundMenuColor ="@color/white"
+        app:icon_height="60dp"
+        app:icon_width="60dp"
+        app:item_backgroundColor="@color/white"
+        app:item_colorSelected="@color/green"
+        app:backgroundNotifications="@color/green"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_margin="4dp"
+        app:item_textColor="@color/black"
+        app:item_textSize="5sp"
+        >
+
+    </com.darwindeveloper.horizontalscrollmenulibrary.custom_views.HorizontalScrollMenuView>
+</RelativeLayout>
