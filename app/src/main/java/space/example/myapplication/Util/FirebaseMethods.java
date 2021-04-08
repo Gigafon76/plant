@@ -10,8 +10,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 
 import space.example.myapplication.R;
+import space.example.myapplication.models.User;
 
 public class FirebaseMethods {
 
@@ -20,17 +22,36 @@ public class FirebaseMethods {
     //firebase
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private String userId;
-    private Context mContext;
     private String userID;
 
-    public FirebaseMethods (Context context){
+    private Context mContext;
+
+    public FirebaseMethods(Context context) {
         mAuth = FirebaseAuth.getInstance();
         mContext = context;
 
-        if (mAuth.getCurrentUser() !=null){
-            userId = mAuth.getCurrentUser().getUid();
+        if(mAuth.getCurrentUser() != null){
+            userID = mAuth.getCurrentUser().getUid();
         }
+    }
+
+    public boolean checkIfUsernameExists(String username, DataSnapshot datasnapshot){
+        Log.d(TAG, "checkIfUsernameExists: checking if " + username + " already exists.");
+
+        User user = new User();
+
+        for (DataSnapshot ds: datasnapshot.getChildren()){
+            Log.d(TAG, "checkIfUsernameExists: datasnapshot: " + ds);
+
+            user.setUsername(ds.getValue(User.class).getUsername());
+            Log.d(TAG, "checkIfUsernameExists: username: " + user.getUsername());
+
+            if(StringManipulation.expandUsername(user.getUsername()).equals(username)){
+                Log.d(TAG, "checkIfUsernameExists: FOUND A MATCH: " + user.getUsername());
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
