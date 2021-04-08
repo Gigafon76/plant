@@ -23,6 +23,7 @@ public class FirebaseMethods {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String userID;
+    private  int id;
 
     private Context mContext;
 
