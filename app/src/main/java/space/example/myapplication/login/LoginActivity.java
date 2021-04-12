@@ -79,29 +79,39 @@ public class LoginActivity extends AppCompatActivity {
                 if (isStringNull(email) && isStringNull(password)) {
                     Toast.makeText(mContext, "You must fill out all the fields", Toast.LENGTH_SHORT).show();
                 } else {
-                    mProgressBar.setVisibility(View.GONE);
-                    mPleaseWait.setVisibility(View.GONE);
+                    mProgressBar.setVisibility(View.VISIBLE);
+                    mPleaseWait.setVisibility(View.VISIBLE);
 
                     mAuth.signInWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    Log.d(TAG, "onComplete: onComplete" + task.isSuccessful());
-                                    if (!task.isSuccessful()) {
-                                        Log.w(TAG, "signInWithEmail: onComplete:" + task.isSuccessful());
+                            .addOnCompleteListener(LoginActivity.this, task -> {
+                                Log.d(TAG, "onComplete: onComplete" + task.isSuccessful());
+                                FirebaseUser user = mAuth.getCurrentUser();
 
-                                        Toast.makeText(LoginActivity.this, getString(R.string.auth_failed),
-                                                Toast.LENGTH_SHORT).show();
-                                        mProgressBar.setVisibility(View.GONE);
-                                        mPleaseWait.setVisibility(View.GONE);
-                                    } else {
-                                        Log.d(TAG, "signInWithEmail: successful login:");
-                                        Toast.makeText(LoginActivity.this, getString(R.string.auth_success),
-                                                Toast.LENGTH_SHORT).show();
-                                        mProgressBar.setVisibility(View.GONE);
-                                        mPleaseWait.setVisibility(View.GONE);
+                                //...
+                                if (!task.isSuccessful()) {
+                                    Log.w(TAG, "signInWithEmail:failed", task.getException());
+
+                                    Toast.makeText(LoginActivity.this, getString(R.string.auth_failed),
+                                            Toast.LENGTH_SHORT).show();
+                                    mProgressBar.setVisibility(View.GONE);
+                                    mPleaseWait.setVisibility(View.GONE);
+                                } else {
+                                    try {
+                                        if (user.isEmailVerified()) {
+                                            Log.d(TAG, "onComplete: success. email is verified");
+                                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                            startActivity(intent);
+                                        } else {
+                                            Toast.makeText(mContext, "Email is not verified \n check your email inbox ", Toast.LENGTH_SHORT).show();
+                                            mProgressBar.setVisibility(View.GONE);
+                                            mPleaseWait.setVisibility(View.GONE);
+                                            mAuth.signOut();
+                                        }
+                                    } catch (NullPointerException e) {
+                                        Log.e(TAG, "onComplete: NullPointerException" + e.getMessage());
                                     }
                                 }
+                                //...
                             });
                 }
             }
