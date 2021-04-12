@@ -54,8 +54,11 @@ public class HomeActivity extends AppCompatActivity {
         menu();
 
         setupFirebaseAuth();
+
         initImageLoader();
         setupBottomNavigationView();
+
+        mAuth.signOut();
 
 
     }
