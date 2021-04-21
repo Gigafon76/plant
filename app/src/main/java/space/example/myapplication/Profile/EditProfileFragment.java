@@ -29,9 +29,8 @@ public class EditProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_editprofile, container, false);
         mProfilePhoto = (ImageView) view.findViewById(R.id.profile_photo);
 
-
-
         setProfileImage();
+
         //back arrow for navigation back to "ProfileActivity"
         ImageView backArrow = (ImageView)view.findViewById(R.id.backArrow);
         backArrow.setOnClickListener(new View.OnClickListener() {

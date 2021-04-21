@@ -1,6 +1,7 @@
 package space.example.myapplication.Profile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -47,6 +48,7 @@ public class AccountSettingActivity extends AppCompatActivity {
         setupSettingsList();
         setupBottomNavigationView();
         setupFragment();
+        getIncoming();
 
         //setup the backarrow for navigating back to "ProfileActivity"
         ImageView backArrow = (ImageView) findViewById(R.id.backArrow);
@@ -60,10 +62,19 @@ public class AccountSettingActivity extends AppCompatActivity {
         });
     }
 
+    private void getIncoming(){
+        Intent intent = getIntent();
+
+        if (intent.hasExtra(getString(R.string.calling_activity))){
+            Log.d(TAG, "getIncoming: received incoming intent from " + getString(R.string.profile_activity));
+            setViewPager(pagerAdapter.getFragmentNumber(getString(R.string.edit_profile_fragment)));
+        }
+    }
+
     private void setupFragment(){
         pagerAdapter = new SectionStatePagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFragment(new EditProfileFragment(),getString(R.string.edit_profile_fragment)); //fragment 0
-        pagerAdapter.addFragment(new SingOutProfileFragment(),getString(R.string.sign_out_fragment)); //fragment 1
+        pagerAdapter.addFragment(new SignOutFragment(),getString(R.string.sign_out_fragment)); //fragment 1
     }
 
     private void setViewPager(int fragmentNumber){

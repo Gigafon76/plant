@@ -14,17 +14,6 @@
 
     <!-- top toolbar -->
   <include layout="@layout/layout_top_category"/>
-        <TextView
-            android:id="@+id/txtText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="@string/text"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:textColor="@color/black"
-            />
 
 
     <!--Middle section (body) -->

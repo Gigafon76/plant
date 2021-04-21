@@ -49,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Log.d(TAG, "onCreate: starting.");
         menuView = (HorizontalScrollMenuView)findViewById(R.id.menu);
-        textView = (TextView)findViewById(R.id.txtText);
+       textView = (TextView)findViewById(R.id.text);
         gridView = findViewById(R.id.gridView);
         menu();
 
