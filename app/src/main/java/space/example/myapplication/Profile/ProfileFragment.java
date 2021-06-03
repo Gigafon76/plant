@@ -93,6 +93,7 @@ public class ProfileFragment extends Fragment {
 
         TextView editProfile =(TextView)view.findViewById(R.id.textEditProfile);
         editProfile.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: navigation to" + mContext.getString(R.string.edit_profile_fragment));
@@ -106,15 +107,13 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setProfileWidgets(UserSetting userSettings){
-        Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.toString());
-        Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.getSetting().getUsername());
+      //  Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.toString());
+      //  Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.getSetting().getUsername());
 
 
         //User user = userSettings.getUser();
         UserAccountSetting settings = userSettings.getSetting();
-
         UniversalImageLoader.setImage(settings.getProfile_photo(), mProfilePhoto, null, "");
-
         mDisplayName.setText(settings.getDisplay_name());
         mUsername.setText(settings.getUsername());
         mWebsite.setText(settings.getWebsite());
@@ -122,7 +121,7 @@ public class ProfileFragment extends Fragment {
         mPosts.setText(String.valueOf(settings.getPosts()));
         mFollowing.setText(String.valueOf(settings.getFollowing()));
         mFollowers.setText(String.valueOf(settings.getFollowers()));
-       // mProgressBar.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.GONE);
     }
 
 

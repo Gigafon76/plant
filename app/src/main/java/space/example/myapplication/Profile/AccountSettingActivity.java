@@ -13,16 +13,25 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.util.ArrayList;
 
 import space.example.myapplication.R;
 import space.example.myapplication.Util.BottomNavigationViewHelper;
+import space.example.myapplication.Util.FirebaseMethods;
 import space.example.myapplication.Util.SectionStatePagerAdapter;
 
 public class AccountSettingActivity extends AppCompatActivity {
@@ -36,6 +45,7 @@ public class AccountSettingActivity extends AppCompatActivity {
     private RelativeLayout mRelativeLayout;
     private static final int ACTIVITY_NUM = 4;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +58,7 @@ public class AccountSettingActivity extends AppCompatActivity {
         setupSettingsList();
         setupBottomNavigationView();
         setupFragment();
-        getIncoming();
+        getIncomingIntent();
 
         //setup the backarrow for navigating back to "ProfileActivity"
         ImageView backArrow = (ImageView) findViewById(R.id.backArrow);
@@ -62,7 +72,7 @@ public class AccountSettingActivity extends AppCompatActivity {
         });
     }
 
-    private void getIncoming(){
+    private void getIncomingIntent(){
         Intent intent = getIntent();
 
         if (intent.hasExtra(getString(R.string.calling_activity))){
@@ -104,6 +114,7 @@ public class AccountSettingActivity extends AppCompatActivity {
         });
 
     }
+
     /**
      * BottomNavigationView setup
      */
@@ -116,5 +127,7 @@ public class AccountSettingActivity extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
     }
+
+
 }
 

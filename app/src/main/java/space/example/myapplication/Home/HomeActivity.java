@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,47 +19,42 @@ import com.google.firebase.auth.FirebaseUser;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import space.example.myapplication.ArrayCategory;
 import space.example.myapplication.R;
 import space.example.myapplication.Util.BottomNavigationViewHelper;
 import space.example.myapplication.Util.UniversalImageLoader;
 import space.example.myapplication.login.LoginActivity;
 
 public class HomeActivity extends AppCompatActivity {
+
     private static final String TAG = "HomeActivity";
     private static final int ACTIVITY_NUM = 0;
-    HorizontalScrollMenuView menuView;
+
+    private Context mContext = HomeActivity.this;
+
+    HorizontalScrollMenuView menu;
     TextView textView;
 
     //firebase
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
-    private Context mContext = HomeActivity.this;
     GridView gridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-
-
         Log.d(TAG, "onCreate: starting.");
-        menuView = (HorizontalScrollMenuView)findViewById(R.id.menu);
-       textView = (TextView)findViewById(R.id.text);
+
+        menu = (HorizontalScrollMenuView)findViewById(R.id.menu);
+        textView = (TextView)findViewById(R.id.txtTxt);
         gridView = findViewById(R.id.gridView);
-        menu();
+        initMenu();
 
         setupFirebaseAuth();
-
         initImageLoader();
         setupBottomNavigationView();
-
-
-
-
     }
+
 
 
     private void initImageLoader(){
@@ -70,15 +63,16 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    private void menu() {
-        menuView.addItem("All plants",R.drawable.allplants);
-        menuView.addItem("flycatcher",R.drawable.muxolovka);
-        menuView.addItem("Dewdrop",R.drawable.rosynka);
-        menuView.addItem("Adipem Puellae",R.drawable.jirynka);
-        menuView.addItem("Nepenthes",R.drawable.nepentisy);
-        menuView.addItem("Ground",R.drawable.grynt);
-        menuView.addItem("Master Class",R.drawable.masterclass);
-        menuView.setOnHSMenuClickListener(new HorizontalScrollMenuView.OnHSMenuClickListener() {
+    private void initMenu() {
+        menu.addItem("All plants",R.drawable.allplants);
+        menu.addItem("flycatcher",R.drawable.muxolovka);
+        menu.addItem("Dewdrop",R.drawable.rosynka);
+        menu.addItem("Adipem Puellae",R.drawable.jirynka);
+        menu.addItem("Nepenthes",R.drawable.nepentisy);
+        menu.addItem("Ground",R.drawable.grynt);
+        menu.addItem("Master Class",R.drawable.masterclass);
+        menu.setOnHSMenuClickListener(new HorizontalScrollMenuView.OnHSMenuClickListener() {
+
             @Override
             public void onHSMClick(com.darwindeveloper.horizontalscrollmenulibrary.extras.MenuItem menuItem, int position) {
                 Toast.makeText(HomeActivity.this,"" + menuItem.getText(),Toast.LENGTH_SHORT).show();
@@ -118,7 +112,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
     /**
-     * Setup the fire
+     * Setup the firebase
      */
     private void setupFirebaseAuth() {
         Log.d(TAG, "setupFirebaseAuth: setting up firebase auth.");

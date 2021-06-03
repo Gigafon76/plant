@@ -7,6 +7,10 @@
     <string name="title_basket">Basket</string>
     <string name="text">text</string>
 
+
+    <!---dialog names-->
+    <string name="confirm_password_dialog">ConfirmPasswordDialog</string>
+
     <string name="edit_profile_fragment">Edit Profile</string>
     <string name="sign_out_fragment">Sign Out</string>
     <string name="profile_fragment">Profile</string>
@@ -18,10 +22,19 @@
     <!---Firebase database fields-->
     <string name="dbname_users">users</string>
     <string name="dbname_user_account_setting">user_account_setting</string>
+    <string name="field_username">username</string>
 
     <!--Intent Extras -->
     <string name="calling_activity">calling_activity</string>
 
     <!-- activity names-->
     <string name="profile_activity">Profile Activity</string>
+
+    <!--strings-->
+    <string name="gallery">GALLERY</string>
+    <string name="photo">PHOTO</string>
+    <string name="string_open_camera">Open Camera</string>
+    <string name="string_next">Next</string>
+
+
 </resources>

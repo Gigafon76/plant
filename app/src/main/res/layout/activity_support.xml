@@ -8,27 +8,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/relLayout1">
 
-            <include layout="@layout/snippet_top_editprofiletoolbar"/>
+        <RelativeLayout
+            android:id="@+id/relLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include layout="@layout/layout_center_viewpager" />
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/relLayout1"
-            android:id="@+id/relLayout2">
+            <RelativeLayout
+                android:id="@+id/relLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/layout_bottom_tabs" />
 
 
-            <include layout="@layout/snippet_center_editprofile"/>
+            </RelativeLayout>
 
-        </RelativeLayout>
 
 
     </RelativeLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
