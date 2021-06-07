@@ -122,7 +122,7 @@ public class GalleryFragment extends Fragment {
         GridImageAdapter adapter = new GridImageAdapter(getActivity(),R.layout.layout_grid_imageview,mAppend,imgURLs);
         gridView.setAdapter(adapter);
 
-        //set the first image to be displayed when the activity fragment view is inflate
+        //set the first image to be displayed when the activity fragment view is infl
         try {
             setImage(imgURLs.get(0),galleryImage,mAppend);
         }catch (IndexOutOfBoundsException e){
