@@ -13,9 +13,11 @@ public class FileSearch {
         ArrayList<String> pathArray= new ArrayList<>();
         File file = new File(directory);
         File[] listFiles = file.listFiles();
-        for (int i = 0; i<listFiles.length;i++){
-            if (listFiles[i].isDirectory()){
-                pathArray.add(listFiles[i].getAbsolutePath());
+        if (listFiles != null) {
+            for (int i = 0; i<listFiles.length;i++){
+                if (listFiles[i].isDirectory()){
+                    pathArray.add(listFiles[i].getAbsolutePath());
+                }
             }
         }
         return pathArray;
@@ -29,9 +31,11 @@ public class FileSearch {
         ArrayList<String> pathArray= new ArrayList<>();
         File file = new File(directory);
         File[] listFiles = file.listFiles();
-        for (int i = 0; i<listFiles.length;i++){
-            if (listFiles[i].isFile()){
-                pathArray.add(listFiles[i].getAbsolutePath());
+        if (listFiles != null) {
+            for (int i = 0; i<listFiles.length;i++){
+                if (listFiles[i].isFile()){
+                    pathArray.add(listFiles[i].getAbsolutePath());
+                }
             }
         }
         return pathArray;

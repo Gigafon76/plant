@@ -1,5 +1,6 @@
 package space.example.myapplication.Support;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,14 +18,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 import space.example.myapplication.R;
 import space.example.myapplication.Util.FilePaths;
 import space.example.myapplication.Util.FileSearch;
+import space.example.myapplication.Util.GridImageAdapter;
 
 public class GalleryFragment extends Fragment {
     private static final String TAG = "GalleryFragment";
+
+     //constant
+    private static final int NUM_GRID_COLUMNS = 3;
+
 
     //widget
     private GridView gridView;
@@ -34,7 +45,7 @@ public class GalleryFragment extends Fragment {
 
     //vars
     private ArrayList<String> directories;
-
+    private String mAppend = "file:/";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -87,6 +98,7 @@ public class GalleryFragment extends Fragment {
                 Log.d(TAG , "onItemSelected: selected" + directories.get(position));
 
                 //setup our image grid for the directory chosen
+                setupGridView(directories.get(position));
             }
 
             @Override
@@ -95,5 +107,63 @@ public class GalleryFragment extends Fragment {
             }
         });
 
+    }
+
+    private void setupGridView (String selectedDirectory){
+        Log.d(TAG , "setupGridView: directory chosen: " + selectedDirectory);
+        final ArrayList<String> imgURLs = FileSearch.getFilePaths(selectedDirectory);
+
+        //set the grid columns width
+        int gridWidth = getResources().getDisplayMetrics().widthPixels;
+        int imageWight = gridWidth/NUM_GRID_COLUMNS;
+        gridView.setColumnWidth(imageWight);
+
+        //use the grid adapter to adapter the image to gridview
+        GridImageAdapter adapter = new GridImageAdapter(getActivity(),R.layout.layout_grid_imageview,mAppend,imgURLs);
+        gridView.setAdapter(adapter);
+
+        //set the first image to be displayed when the activity fragment view is inflate
+        try {
+            setImage(imgURLs.get(0),galleryImage,mAppend);
+        }catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+        }
+
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent , View view , int position , long id) {
+                Log.d(TAG , "onItemClick: selected an image:" + imgURLs.get(position));
+
+                setImage(imgURLs.get(position),galleryImage,mAppend);
+            }
+        });
+    }
+    private void setImage (String imgURL,ImageView image, String append )  {
+        Log.d(TAG , "setImage: setting image");
+
+        ImageLoader imageLoader = ImageLoader.getInstance();
+
+        imageLoader.displayImage(append + imgURL , image , new ImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String imageUri , View view) {
+                mProgressBar.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onLoadingFailed(String imageUri , View view , FailReason failReason) {
+                mProgressBar.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onLoadingComplete(String imageUri , View view , Bitmap loadedImage) {
+                mProgressBar.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onLoadingCancelled(String imageUri , View view) {
+                mProgressBar.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 }
