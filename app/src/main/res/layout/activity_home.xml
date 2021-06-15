@@ -13,28 +13,9 @@
 
 
     <!-- top toolbar -->
-  <include layout="@layout/layout_top_category"/>
+  <include layout="@layout/layout_top_category"
+      android:id="@+id/toolbar"/>
 
-        <RelativeLayout
-            android:id="@+id/relLayout0"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linLayout2"
-            android:layout_marginBottom="50dp">
-
-            <GridView
-                android:id="@+id/gridViewHome"
-                android:numColumns="3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:verticalSpacing="1dp"
-                android:horizontalSpacing="1dp"
-                android:stretchMode="columnWidth"
-                android:gravity="center">
-
-            </GridView>
-
-        </RelativeLayout>
     <!--Middle section (body) -->
 
         <!--bottom navigation-->
@@ -44,6 +25,23 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/relLayout1"
             android:layout_marginTop="51dp">
+
+
+            <GridView
+                android:numColumns="3"
+                android:layout_marginTop="60dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/gridView"
+                android:verticalSpacing="1dp"
+                android:horizontalSpacing="1dp"
+                android:stretchMode="spacingWidth"
+
+                android:gravity="center">
+
+            </GridView>
+
+
 
             <include layout="@layout/fragment_allplants" />
 
